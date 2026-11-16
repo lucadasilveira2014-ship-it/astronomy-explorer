@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090f25">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Astronomy Explorer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Astronomy Explorer</title>
+<style>
+:root{color-scheme:dark;--bg:#080d20;--panel:#121c39;--line:#29385f;--muted:#aab7d4;--accent:#8796ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#293766 0,#101936 42%,var(--bg) 80%);color:#f5f7ff;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+header{padding:calc(16px + env(safe-area-inset-top)) 18px 12px;display:flex;justify-content:space-between;align-items:center}
+h1{font-size:23px;margin:3px 0}.eyebrow{font-size:10px;letter-spacing:2px;color:#b8c7ff}.date{font-size:12px;color:var(--muted);text-align:right}
+nav{display:flex;gap:6px;padding:7px;margin:0 12px 16px;background:#070c1b;border:1px solid #1d2948;border-radius:16px;position:sticky;top:0;z-index:5}
+nav button{flex:1;border:0;border-radius:11px;padding:11px 4px;background:transparent;color:#c1cbe2;font-size:12px}
+nav button.active{background:#6979d8;color:white;font-weight:700}
+main{padding:0 14px 35px;max-width:650px;margin:auto}.page{display:none}.page.active{display:block}
+.panel{background:#ffffff0d;border:1px solid #ffffff20;border-radius:17px;padding:15px;margin-bottom:12px}
+h2{font-size:21px;margin:3px 0 5px}.sub,.muted{color:var(--muted);font-size:13px;line-height:1.5}
+.solar{height:270px;position:relative;display:grid;place-items:center;overflow:hidden}
+.sun{width:62px;height:62px;border-radius:50%;background:radial-gradient(circle,#fff7b2,#ffad36 65%,#ff692c);box-shadow:0 0 35px #ffb43c;z-index:2}
+.orbit{position:absolute;border:1px solid #7183b6;border-radius:50%;animation:spin 24s linear infinite}
+.orbit.one{width:145px;height:145px}.orbit.two{width:245px;height:245px;animation-duration:36s}
+.earth{position:absolute;top:-10px;left:calc(50% - 10px);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#7ed9ff,#245ca8);box-shadow:0 0 12px #8caaff}
+.moonorbit{position:absolute;inset:-11px;border:1px dashed #a6b5d5;border-radius:50%;animation:spin 5s linear infinite}
+.moon{position:absolute;top:-5px;left:calc(50% - 5px);width:10px;height:10px;background:#e5e9f4;border-radius:50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;font-size:12px;gap:6px}.legend b{display:block;margin-top:4px}
+.moon-display{width:108px;height:108px;border-radius:50%;margin:17px auto;background:#dfe5f1;box-shadow:0 0 30px #b7c9ff35}
+.center{text-align:center}.big{font-size:23px;font-weight:750}.field{width:100%;min-width:0;background:#0b1430;border:1px solid #52658f;border-radius:10px;padding:13px;color:white;font-size:16px}
+.row{display:flex;gap:8px}.primary{background:#7180e5;border:0;border-radius:10px;padding:0 16px;color:white;font-weight:700}
+.item{padding:11px;background:#ffffff0b;border-radius:11px;margin-top:8px}.item b{display:block;font-size:14px}.item span{font-size:12px;color:var(--muted)}
+a{color:#bdc8ff}footer{text-align:center;color:#8794b5;font-size:11px;padding:12px}
+</style>
+</head>
+<body>
+<header><div><div class="eyebrow">EXPLORE THE UNIVERSE</div><h1>🌌 Astronomy Explorer</h1></div><div class="date" id="today"></div></header>
+<nav aria-label="Main pages">
+<button class="active" data-tab="solar">☀️ Solar System</button>
+<button data-tab="moon">🌙 Moon & Eclipses</button>
+<button data-tab="sky">✨ My Sky</button>
+</nav>
+<main>
+<section class="page active" id="solar">
+<h2>Our Solar System</h2><p class="sub">Watch how our cosmic neighborhood moves.</p>
+<div class="panel">
+<div class="solar" aria-label="Animated educational solar system model"><div class="sun"></div><div class="orbit one"><div class="earth"><div class="moonorbit"><div class="moon"></div></div></div></div><div class="orbit two"></div></div>
+<p class="muted center">Animated educational model · distances and speeds are not to scale</p>
+<div class="legend"><div>☀️<b>Sun</b><span class="muted">Star</span></div><div>🌍<b>Earth</b><span class="muted">Rotates daily</span></div><div>🌕<b>Moon</b><span class="muted">Orbits Earth</span></div></div>
+</div>
+<div class="panel"><b>How everything moves</b>
+<div class="item"><b>🌍 Earth's rotation</b><span>Earth spins on its axis about every 24 hours. This creates day and night.</span></div>
+<div class="item"><b>☀️ Earth's revolution</b><span>Earth travels around the Sun in about 365.25 days.</span></div>
+<div class="item"><b>🌙 Moon's orbit</b><span>The Moon travels around Earth in about 27.3 days relative to distant stars.</span></div></div>
+</section>
+<section class="page" id="moon">
+<h2>Moon & Eclipses</h2><p class="sub">Your lunar update for today.</p>
+<div class="panel center"><div class="eyebrow">TODAY'S MOON PHASE</div><div class="moon-display" id="moon-art"></div><div class="big" id="phase">Loading moon phase…</div><p class="muted" id="illumination">Checking lunar data</p><p class="muted" id="next-phase"></p></div>
+<div class="panel"><b>🌞 Upcoming solar eclipse</b><p class="big" id="solar-eclipse">See NASA's current eclipse calendar</p><p class="muted">Eclipse visibility depends on your location. A worldwide eclipse may not be visible where you live.</p><hr style="border-color:#29385f"><b>🌕 Upcoming lunar eclipse</b><p class="big" id="lunar-eclipse">See NASA's current eclipse calendar</p><p class="muted">For verified future dates and maps, use the NASA eclipse catalog.</p><a href="https://science.nasa.gov/eclipses/future-eclipses/" target="_blank" rel="noopener">NASA future eclipses ↗</a></div>
+<div class="panel muted">Moon phase dates are requested from the U.S. Naval Observatory. If the service is unavailable, try again later. Eclipse calendar links to NASA for current predictions.</div>
+</section>
+<section class="page" id="sky">
+<h2>Your Night Sky ✨</h2><p class="sub">Find seasonal constellations to look for from your location.</p>
+<div class="panel"><label for="zip"><b>📍 Enter your US ZIP code</b></label><div class="row" style="margin-top:9px"><input id="zip" class="field" inputmode="numeric" maxlength="5" placeholder="Example: 01760"><button class="primary" id="search">Search</button></div><p class="muted" id="status">Your ZIP code is only used to look up an approximate location.</p></div>
+<div class="panel"><b>Tonight's constellation guide</b><p class="muted" id="place">Waiting for your location</p><div id="constellations"><p class="muted">Enter your ZIP code to see seasonal suggestions.</p></div></div>
+<div class="panel"><b>Stargazing tips</b><p class="muted">🌃 Find a dark place away from bright lights.<br>🌙 Check how bright the Moon is.<br>☁️ Clouds can block your view.<br>🧭 A star chart app can help you identify exact positions.</p></div>
+<p class="muted">These are seasonal suggestions, not a live planetarium chart. Exact visibility changes by date, time, horizon, weather and light pollution.</p>
+</section>
+<footer>ASTRONOMY EXPLORER · LOOK UP, DISCOVER MORE 🌌</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+$('today').textContent=new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab));}));
+async function moonData(){
+ try{
+ const d=new Date(),from=new Date(d);from.setDate(from.getDate()-30);
+ const fmt=x=>`${x.getFullYear()}-${x.getMonth()+1}-${x.getDate()}`;
+ const r=await fetch(`https://aa.usno.navy.mil/api/moon/phases/date?date=${fmt(from)}&nump=10`);
+ if(!r.ok)throw Error();const data=await r.json(),events=(data.phasedata||[]).map(x=>({...x,date:new Date(+x.year,+x.month-1,+x.day)})).sort((a,b)=>a.date-b.date);
+ let prev=null,next=null;for(const e of events){if(e.date<=d)prev=e;else if(!next)next=e;}
+ if(!prev)throw Error();
+ const age=(d-prev.date)/86400000,illum=Math.round((1-Math.cos(2*Math.PI*age/29.53059))/2*100);
+ const name=age<1.5||age>28?'New Moon':age<6.5?'Waxing Crescent':age<8.5?'First Quarter':age<13.5?'Waxing Gibbous':age<16.5?'Full Moon':age<21.5?'Waning Gibbous':age<23.5?'Last Quarter':'Waning Crescent';
+ $('phase').textContent=name;$('illumination').textContent=`Approximately ${illum}% illuminated`;
+ $('moon-art').style.background=name==='New Moon'?'#20283e':name==='Full Moon'?'#e5e8f0':`linear-gradient(90deg,#20283e ${100-illum}%,#e5e8f0 ${100-illum}%)`;
+ $('next-phase').textContent=next?`Next major phase: ${next.phase} · ${next.date.toLocaleDateString(undefined,{month:'long',day:'numeric'})}`:'';
+ }catch(e){$('phase').textContent='Moon data unavailable';$('illumination').textContent='Check your internet connection and try again.'}
+}
+moonData();
+const lists=[
+ {north:['Orion','Taurus','Gemini','Canis Major','Auriga'],south:['Crux','Centaurus','Carina','Vela','Orion']},
+ {north:['Leo','Virgo','Boötes','Ursa Major','Cancer'],south:['Crux','Centaurus','Carina','Hydra','Leo']},
+ {north:['Scorpius','Sagittarius','Lyra','Cygnus','Aquila'],south:['Scorpius','Sagittarius','Crux','Pavo','Triangulum Australe']},
+ {north:['Pegasus','Andromeda','Cassiopeia','Perseus','Aquarius'],south:['Grus','Phoenix','Tucana','Sculptor','Aquarius']}
+];
+$('search').addEventListener('click',async()=>{
+ const z=$('zip').value.trim();if(!/^\d{5}$/.test(z)){$('status').textContent='Please enter a valid 5-digit ZIP code.';return}
+ $('status').textContent='Looking up your ZIP code…';$('constellations').innerHTML='';
+ try{
+ const r=await fetch(`https://api.zippopotam.us/us/${z}`);if(!r.ok)throw Error('ZIP code not found. Check it and try again.');
+ const data=await r.json(),p=data.places[0],lat=Number(p.latitude);
+ $('place').textContent=`${p['place name']}, ${p['state abbreviation']}`;
+ const month=new Date().getMonth(),season=Math.floor(((month+1)%12)/3),names=lists[season][lat>=0?'north':'south'];
+ names.forEach((n,i)=>{const div=document.createElement('div');div.className='item';const b=document.createElement('b');b.textContent=['✦ ','✧ ','✨ ','🌟 ','✦ '][i]+n;const span=document.createElement('span');span.textContent='Seasonal suggestion · check the sky after dark';div.append(b,span);$('constellations').append(div)});
+ $('status').textContent='Location found. These are seasonal sky suggestions.';
+ }catch(e){$('status').textContent=e.message||'Could not look up that ZIP code.';$('place').textContent='Location not found';}
+});
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
